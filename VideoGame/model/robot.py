@@ -1,25 +1,18 @@
 import pygame
 
-from main import game_running
 
+class Robot(pygame.sprite.Sprite):
+    def __init__(self,x,y,ventana_horizontal,ventana_vertical):
+        super().__init__()
+        self.imagen = pygame.image.load("imagenes/robot.png")
+        self.cuerpoRobot=self.imagen.get_rect()
+        self.cuerpoRobot.x = x
+        self.cuerpoRobot.y=y
+        self.salud=10
+        self.trajeAcuatico = False
+        self.ventana_horzontal = ventana_horizontal
+        self.ventana_vertical = ventana_vertical
 
-class Robot():
-    def __init__(self):
-        self.position = [0, 0]
-        self.speed= 10
-
-    def move_right(self):
-        self.position[1] += self.speed
-    def move_left(self):
-        self.position[1] -= self.speed
-
-robot_one= Robot()
-
-
-while game_running:
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                robot_one.move_right()
-            if event.key == pygame.K_LEFT:
-                robot_one.move_left()
+    def move(self, dx, dy):
+        self.cuerpoRobot.x += dx
+        self.cuerpoRobot.y += dy
