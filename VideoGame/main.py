@@ -4,15 +4,13 @@ from pygame.locals import QUIT, KEYDOWN, K_LEFT, K_RIGHT, K_UP, K_DOWN
 from VideoGame.model.Mapa import Mapa
 from model.robot import Robot
 
-# Constantes
+
 ANCHO_VENTANA = 1050
 ALTO_VENTANA = 600
 VELOCIDAD_MOVIMIENTO = 2
 DIAMANTES_NECESARIOS = 4
 TIEMPO_ESPERA = 3000
-s=True
-numero=2
-esPar=True
+
 pygame.init()
 ventana = pygame.display.set_mode((ANCHO_VENTANA, ALTO_VENTANA))
 

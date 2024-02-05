@@ -2,7 +2,7 @@ import pygame
 
 class Mapa:
     def __init__(self):
-        # Carga las imágenes
+
         self.muro = pygame.transform.scale(pygame.image.load("imagenes/lava.png"), (50, 50))
         self.agua = pygame.transform.scale(pygame.image.load("imagenes/agua.jpg"), (50, 50))
         self.bomba = pygame.transform.scale(pygame.image.load("imagenes/tnt.png"), (50, 50))
