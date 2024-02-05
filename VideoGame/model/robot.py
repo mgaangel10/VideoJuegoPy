@@ -1,3 +1,5 @@
+import time
+
 import pygame
 
 class Robot(pygame.sprite.Sprite):
@@ -57,4 +59,5 @@ class Robot(pygame.sprite.Sprite):
                 for dy in [-1, 0, 1]:
                     if mapa[y + dy][x + dx] == 'M':
                         mapa[y + dy] = mapa[y + dy][:x + dx] + ' ' + mapa[y + dy][x + dx + 1:]
+
 

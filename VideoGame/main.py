@@ -7,10 +7,12 @@ from model.robot import Robot
 # Constantes
 ANCHO_VENTANA = 1050
 ALTO_VENTANA = 600
-VELOCIDAD_MOVIMIENTO = 1
+VELOCIDAD_MOVIMIENTO = 2
 DIAMANTES_NECESARIOS = 4
 TIEMPO_ESPERA = 3000
-
+s=True
+numero=2
+esPar=True
 pygame.init()
 ventana = pygame.display.set_mode((ANCHO_VENTANA, ALTO_VENTANA))
 
@@ -18,7 +20,7 @@ mapa_instance = Mapa()
 mi_robot = Robot(300, 240, mapa_instance)
 mi_robot.imagen = pygame.transform.scale(mi_robot.imagen, (50, 50))
 
-font = pygame.font.Font(None, 36)  # Tamaño de la fuente
+font = pygame.font.Font(None, 36)
 with open('mapa.txt', 'r') as f:
     next(f)
     mapa = f.readlines()
@@ -32,13 +34,21 @@ while game_running:
     keys = pygame.key.get_pressed()
     if keys[K_LEFT]:
         mi_robot.move(-VELOCIDAD_MOVIMIENTO, 0, ANCHO_VENTANA, ALTO_VENTANA, mapa)
+        mi_robot.imagen = pygame.image.load("imagenes/steven_l.png")
+        mi_robot.imagen = pygame.transform.scale(mi_robot.imagen, (50, 50))
     if keys[K_RIGHT]:
         mi_robot.move(VELOCIDAD_MOVIMIENTO, 0, ANCHO_VENTANA, ALTO_VENTANA, mapa)
+        mi_robot.imagen = pygame.image.load("imagenes/steven_r.png")
+        mi_robot.imagen = pygame.transform.scale(mi_robot.imagen, (50, 50))
     if keys[K_UP]:
         mi_robot.move(0, -VELOCIDAD_MOVIMIENTO, ANCHO_VENTANA, ALTO_VENTANA, mapa)
+        mi_robot.imagen = pygame.image.load("imagenes/steven_espalda.png")
+        mi_robot.imagen = pygame.transform.scale(mi_robot.imagen, (50, 50))
     if keys[K_DOWN]:
         mi_robot.move(0, VELOCIDAD_MOVIMIENTO, ANCHO_VENTANA, ALTO_VENTANA, mapa)
-    if keys[pygame.K_t]:  # Añade este bloque de código
+        mi_robot.imagen = pygame.image.load("imagenes/steven.png")
+        mi_robot.imagen = pygame.transform.scale(mi_robot.imagen, (50, 50))
+    if keys[pygame.K_t]:
         if mi_robot.inventario['T'] > 0:
             mi_robot.trajeAcuaticoActivo = not mi_robot.trajeAcuaticoActivo
             if mi_robot.trajeAcuaticoActivo:
@@ -70,8 +80,12 @@ while game_running:
     mapa_instance.dibujar(ventana, mapa)
     ventana.blit(mi_robot.imagen, mi_robot.cuerpoRobot)
 
-
-    vida_texto = font.render(f'Vida: {mi_robot.salud}', True, (255, 255, 0))
+    if mi_robot.salud > 5:
+        vida_texto = font.render(f'Vida: {mi_robot.salud}', True, (0, 255, 0))
+    elif mi_robot.salud > 3:
+            vida_texto = font.render(f'Vida: {mi_robot.salud}', True, (255, 255, 0))
+    else:
+        vida_texto = font.render(f'Vida: {mi_robot.salud}', True, (255,0,0))
 
     ventana.blit(vida_texto, (10, 10))
     for i, (objeto, cantidad) in enumerate(mi_robot.inventario.items()):
